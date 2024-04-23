@@ -1,0 +1,40 @@
+
+
+
+
+
+
+
+
+
+
+public function add()
+    {
+        $photo = $this->Photos->newEmptyEntity();
+        if ($this->request->is('post')) {
+
+            $files = $this->request->getUploadedFiles();
+            $files['photo']->getStream();
+            $files['photo']->getSize();
+            $files['photo']->getClientFileName();
+
+            $myname = $this->request->getData()['photo']->getClientFileName();
+            $myext = substr(strchr($myname,"."),1);
+            $mypaht = "img/".$myname.".".$myext;
+
+            $photo = $this->Photos->patchEntity($photo, $this->request->getData());
+
+            $photo->photo = $myname.".".$myext;
+            $files['photo']->moveTo(WWW_ROOT.$mypaht);
+
+            if ($this->Photos->save($photo)) {
+                $this->Flash->success(__('The photo has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The photo could not be saved. Please, try again.'));
+        }
+        $users = $this->Photos->Users->find('list', limit: 200)->all();
+        $albums = $this->Photos->Albums->find('list', limit: 200)->all();
+        $this->set(compact('photo', 'users', 'albums'));
+    }
