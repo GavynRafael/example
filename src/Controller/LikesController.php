@@ -18,7 +18,7 @@ class LikesController extends AppController
     public function index()
     {
         $query = $this->Likes->find()
-            ->contain(['Photos', 'Users']);
+            ->contain(['Users', 'Photos']);
         $likes = $this->paginate($query);
 
         $this->set(compact('likes'));
@@ -33,7 +33,7 @@ class LikesController extends AppController
      */
     public function view($id = null)
     {
-        $like = $this->Likes->get($id, contain: ['Photos', 'Users']);
+        $like = $this->Likes->get($id, contain: ['Users', 'Photos']);
         $this->set(compact('like'));
     }
 
@@ -54,9 +54,9 @@ class LikesController extends AppController
             }
             $this->Flash->error(__('The like could not be saved. Please, try again.'));
         }
-        $photos = $this->Likes->Photos->find('list', limit: 200)->all();
         $users = $this->Likes->Users->find('list', limit: 200)->all();
-        $this->set(compact('like', 'photos', 'users'));
+        $photos = $this->Likes->Photos->find('list', limit: 200)->all();
+        $this->set(compact('like', 'users', 'photos'));
     }
 
     /**
@@ -78,9 +78,9 @@ class LikesController extends AppController
             }
             $this->Flash->error(__('The like could not be saved. Please, try again.'));
         }
-        $photos = $this->Likes->Photos->find('list', limit: 200)->all();
         $users = $this->Likes->Users->find('list', limit: 200)->all();
-        $this->set(compact('like', 'photos', 'users'));
+        $photos = $this->Likes->Photos->find('list', limit: 200)->all();
+        $this->set(compact('like', 'users', 'photos'));
     }
 
     /**

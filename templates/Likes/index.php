@@ -32,20 +32,22 @@ $this->Breadcrumbs->add([
         <table class="table table-hover text-nowrap">
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('photo_id') ?></th>
-                    <th><?= $this->Paginator->sort('user_id') ?></th>
+                    <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
+                    <th><?= $this->Paginator->sort('user_id') ?></th>
+                    <th><?= $this->Paginator->sort('photo_id') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($likes as $like) : ?>
                     <tr>
-                        <td><?= $like->has('photo') ? $this->Html->link($like->photo->title, ['controller' => 'Photos', 'action' => 'view', $like->photo->id]) : '' ?></td>
-                        <td><?= $like->has('user') ? $this->Html->link($like->user->name, ['controller' => 'Users', 'action' => 'view', $like->user->id]) : '' ?></td>
+                        <td><?= $this->Number->format($like->id) ?></td>
                         <td><?= h($like->created) ?></td>
                         <td><?= h($like->modified) ?></td>
+                        <td><?= $like->has('user') ? $this->Html->link($like->user->name, ['controller' => 'Users', 'action' => 'view', $like->user->id]) : '' ?></td>
+                        <td><?= $like->has('photo') ? $this->Html->link($like->photo->title, ['controller' => 'Photos', 'action' => 'view', $like->photo->id]) : '' ?></td>
                         <td class="actions">
                             <?= $this->Html->link(__('View'), ['action' => 'view', $like->photo_id], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>
                             <?= $this->Html->link(__('Edit'), ['action' => 'edit', $like->photo_id], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>

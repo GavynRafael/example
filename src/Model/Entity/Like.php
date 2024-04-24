@@ -8,13 +8,14 @@ use Cake\ORM\Entity;
 /**
  * Like Entity
  *
- * @property int $photo_id
- * @property int $user_id
+ * @property int $id
  * @property \Cake\I18n\DateTime $created
  * @property \Cake\I18n\DateTime $modified
+ * @property int $user_id
+ * @property int $photo_id
  *
- * @property \App\Model\Entity\Photo $photo
  * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Photo $photo
  */
 class Like extends Entity
 {
@@ -30,7 +31,9 @@ class Like extends Entity
     protected array $_accessible = [
         'created' => true,
         'modified' => true,
-        'photo' => true,
+        'user_id' => true,
+        'photo_id' => true,
         'user' => true,
+        'photo' => true,
     ];
 }

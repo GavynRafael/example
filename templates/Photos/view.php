@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Photo $photo
@@ -83,8 +84,9 @@ $this->Breadcrumbs->add([
     <div class="card-header d-flex">
         <h3 class="card-title"><?= __('Related Coments') ?></h3>
         <div class="ml-auto">
-            <?= $this->Html->link(__('New Coment'), ['controller' => 'Coments', 'action' => 'add', '?' => ['photo_id' => $photo->id]], ['class' => 'btn btn-primary btn-sm']) ?>
-            <?= $this->Html->link(__('List Coments'), ['controller' => 'Coments', 'action' => 'index'], ['class' => 'btn btn-primary btn-sm']) ?>
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-lg">
+                Coment
+            </button>
         </div>
     </div>
     <div class="card-body table-responsive p-0">
@@ -136,25 +138,27 @@ $this->Breadcrumbs->add([
     <div class="card-body table-responsive p-0">
         <table class="table table-hover text-nowrap">
             <tr>
-                <th><?= __('Photo Id') ?></th>
-                <th><?= __('User Id') ?></th>
+                <th><?= __('Id') ?></th>
                 <th><?= __('Created') ?></th>
                 <th><?= __('Modified') ?></th>
+                <th><?= __('User Id') ?></th>
+                <th><?= __('Photo Id') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php if (empty($photo->likes)) : ?>
                 <tr>
-                    <td colspan="5" class="text-muted">
+                    <td colspan="6" class="text-muted">
                         <?= __('Likes record not found!') ?>
                     </td>
                 </tr>
             <?php else : ?>
                 <?php foreach ($photo->likes as $like) : ?>
                     <tr>
-                        <td><?= h($like->photo_id) ?></td>
-                        <td><?= h($like->user_id) ?></td>
+                        <td><?= h($like->id) ?></td>
                         <td><?= h($like->created) ?></td>
                         <td><?= h($like->modified) ?></td>
+                        <td><?= h($like->user_id) ?></td>
+                        <td><?= h($like->photo_id) ?></td>
                         <td class="actions">
                             <?= $this->Html->link(__('View'), ['controller' => 'Likes', 'action' => 'view', $like->photo_id], ['class' => 'btn btn-xs btn-outline-primary']) ?>
                             <?= $this->Html->link(__('Edit'), ['controller' => 'Likes', 'action' => 'edit', $like->photo_id], ['class' => 'btn btn-xs btn-outline-primary']) ?>
@@ -165,4 +169,32 @@ $this->Breadcrumbs->add([
             <?php endif; ?>
         </table>
     </div>
+</div>
+<div class="modal fade" id="modal-lg">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Coment</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <?= $this->Form->create(null, ['url' => ['controller' => 'coments', 'action' => 'add'], 'role' => 'form']) ?>
+            <div class="modal-body">
+                <?php
+                $auth = $this->getRequest()->getSession()->read()['Auth'];
+                ?>
+                <input type="hidden" name="user_id" id="" value="<?= $auth['id'] ?>">
+                <input type="hidden" name="photo_id" value="<?= $photo->id ?>">
+                <textarea name="coment" id="" class="form-control" cols="30" rows="10"></textarea>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+            <?= $this->Form->end() ?>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>

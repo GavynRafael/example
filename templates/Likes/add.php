@@ -17,6 +17,7 @@ $this->Breadcrumbs->add([
 <div class="card card-primary card-outline">
     <?= $this->Form->create($like, ['valueSources' => ['query', 'context']]) ?>
     <div class="card-body">
+        <?= $this->Form->control('id') ?>
     </div>
     <div class="card-footer d-flex">
         <div class="ml-auto">

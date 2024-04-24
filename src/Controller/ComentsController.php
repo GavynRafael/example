@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -50,7 +51,7 @@ class ComentsController extends AppController
             if ($this->Coments->save($coment)) {
                 $this->Flash->success(__('The coment has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller'=>'photos','action' => 'view', $coment->photo_id]);
             }
             $this->Flash->error(__('The coment could not be saved. Please, try again.'));
         }

@@ -25,8 +25,8 @@ class LikesTableTest extends TestCase
      */
     protected array $fixtures = [
         'app.Likes',
-        'app.Photos',
         'app.Users',
+        'app.Photos',
     ];
 
     /**
@@ -51,6 +51,17 @@ class LikesTableTest extends TestCase
         unset($this->Likes);
 
         parent::tearDown();
+    }
+
+    /**
+     * Test validationDefault method
+     *
+     * @return void
+     * @uses \App\Model\Table\LikesTable::validationDefault()
+     */
+    public function testValidationDefault(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
     }
 
     /**

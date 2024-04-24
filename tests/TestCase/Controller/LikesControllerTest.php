@@ -23,8 +23,8 @@ class LikesControllerTest extends TestCase
      */
     protected array $fixtures = [
         'app.Likes',
-        'app.Photos',
         'app.Users',
+        'app.Photos',
     ];
 
     /**

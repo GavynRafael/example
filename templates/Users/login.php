@@ -33,7 +33,7 @@ $this->layout = 'CakeLte.login';
         <?= $this->Form->end() ?>
 
         <p class="mb-0">
-            <?= $this->Html->link(__('Register a new membership'), ['action' => 'register']) ?>
+            <?= $this->Html->link(__('Register a new membership'), ['action' => 'add']) ?>
         </p>
     </div>
     <!-- /.login-card-body -->

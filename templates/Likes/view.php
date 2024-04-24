@@ -21,12 +21,16 @@ $this->Breadcrumbs->add([
     <div class="card-body table-responsive p-0">
         <table class="table table-hover text-nowrap">
             <tr>
+                <th><?= __('User') ?></th>
+                <td><?= $like->has('user') ? $this->Html->link($like->user->name, ['controller' => 'Users', 'action' => 'view', $like->user->id]) : '' ?></td>
+            </tr>
+            <tr>
                 <th><?= __('Photo') ?></th>
                 <td><?= $like->has('photo') ? $this->Html->link($like->photo->title, ['controller' => 'Photos', 'action' => 'view', $like->photo->id]) : '' ?></td>
             </tr>
             <tr>
-                <th><?= __('User') ?></th>
-                <td><?= $like->has('user') ? $this->Html->link($like->user->name, ['controller' => 'Users', 'action' => 'view', $like->user->id]) : '' ?></td>
+                <th><?= __('Id') ?></th>
+                <td><?= $this->Number->format($like->id) ?></td>
             </tr>
             <tr>
                 <th><?= __('Created') ?></th>

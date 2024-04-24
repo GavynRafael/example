@@ -43,7 +43,6 @@ class PhotosController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-
     public function add()
     {
         $photo = $this->Photos->newEmptyEntity();
@@ -74,6 +73,7 @@ class PhotosController extends AppController
         $albums = $this->Photos->Albums->find('list', limit: 200)->all();
         $this->set(compact('photo', 'users', 'albums'));
     }
+
     /**
      * Edit method
      *

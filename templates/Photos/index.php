@@ -36,7 +36,7 @@ $this->Breadcrumbs->add([
                 <div class="card-body">
                     <h5 class="card-title"><?= h($photo->title) ?></h5>
                     <p class="card-text"><?= h($photo->description) ?></p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $photo->id], ['class' => 'btn btn-primary', 'escape' => false]) ?>
                 </div>
             </div>
         <?php endforeach; ?>
@@ -57,9 +57,3 @@ $this->Breadcrumbs->add([
     </div>
     <!-- /.card-footer -->
 </div>
-<!-- <td><?= $photo->has('user') ? $this->Html->link($photo->user->name, ['controller' => 'Users', 'action' => 'view', $photo->user->id]) : '' ?></td>
-<td><?= $photo->has('album') ? $this->Html->link($photo->album->name, ['controller' => 'Albums', 'action' => 'view', $photo->album->id]) : '' ?></td>
-<td class="actions">
-    <?= $this->Html->link(__('View'), ['action' => 'view', $photo->id], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>
-    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $photo->id], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>
-    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $photo->id], ['class' => 'btn btn-xs btn-outline-danger', 'escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $photo->id)]) ?> -->

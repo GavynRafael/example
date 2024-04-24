@@ -11,8 +11,8 @@ use Cake\Validation\Validator;
 /**
  * Likes Model
  *
- * @property \App\Model\Table\PhotosTable&\Cake\ORM\Association\BelongsTo $Photos
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\PhotosTable&\Cake\ORM\Association\BelongsTo $Photos
  *
  * @method \App\Model\Entity\Like newEmptyEntity()
  * @method \App\Model\Entity\Like newEntity(array $data, array $options = [])
@@ -48,14 +48,33 @@ class LikesTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Photos', [
-            'foreignKey' => 'photo_id',
-            'joinType' => 'INNER',
-        ]);
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER',
         ]);
+        $this->belongsTo('Photos', [
+            'foreignKey' => 'photo_id',
+            'joinType' => 'INNER',
+        ]);
+    }
+
+    /**
+     * Default validation rules.
+     *
+     * @param \Cake\Validation\Validator $validator Validator instance.
+     * @return \Cake\Validation\Validator
+     */
+    public function validationDefault(Validator $validator): Validator
+    {
+        $validator
+            ->integer('user_id')
+            ->notEmptyString('user_id');
+
+        $validator
+            ->integer('photo_id')
+            ->notEmptyString('photo_id');
+
+        return $validator;
     }
 
     /**
@@ -67,8 +86,8 @@ class LikesTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn(['photo_id'], 'Photos'), ['errorField' => 'photo_id']);
         $rules->add($rules->existsIn(['user_id'], 'Users'), ['errorField' => 'user_id']);
+        $rules->add($rules->existsIn(['photo_id'], 'Photos'), ['errorField' => 'photo_id']);
 
         return $rules;
     }

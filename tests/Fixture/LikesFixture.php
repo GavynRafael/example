@@ -19,10 +19,11 @@ class LikesFixture extends TestFixture
     {
         $this->records = [
             [
-                'photo_id' => 1,
+                'id' => 1,
+                'created' => '2024-04-24 14:09:13',
+                'modified' => '2024-04-24 14:09:13',
                 'user_id' => 1,
-                'created' => '2024-04-23 11:36:54',
-                'modified' => '2024-04-23 11:36:54',
+                'photo_id' => 1,
             ],
         ];
         parent::init();
